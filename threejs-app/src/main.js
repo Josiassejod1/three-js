@@ -16,16 +16,22 @@ var cubeMaterial = new THREE.MeshBasicMaterial({ color: 0x00ff00 });
 
 var cube = new THREE.Mesh(cubeGeometry, cubeMaterial);
 
-cube.position.set(0, 0, 0);
+cube.position.set(-5, 0, 0);
 scene.add(cube);
+
+const geometry = new THREE.CapsuleGeometry(1, 1);
+const material = new THREE.MeshBasicMaterial({ color: "purple" });
+const capsule = new THREE.Mesh(geometry, material);
+capsule.position.set(0, 0, 0);
+scene.add(capsule);
 
 var renderer = new THREE.WebGLRenderer({ antialias: true });
 renderer.setSize(window.innerWidth, window.innerHeight);
 var element = document.getElementById("app");
 element.appendChild(renderer.domElement);
 function animate() {
-  cube.rotation.y += 0.01;
   cube.rotation.x += 0.01;
+  capsule.rotation.y += 0.01;
   requestAnimationFrame(animate);
   renderer.render(scene, camera);
 }

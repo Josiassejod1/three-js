@@ -13,11 +13,38 @@ camera.lookAt(0, 0, 0);
 
 var cubeGeometry = new THREE.BoxGeometry(2, 2, 2);
 var cubeMaterial = new THREE.MeshBasicMaterial({ color: 0x00ff00 });
+var newCube = null;
 
 var cube = new THREE.Mesh(cubeGeometry, cubeMaterial);
 
+for (let i = 0; i < 10; i++) {
+  newCube = cube.clone();
+  const randomColor = Math.random() * 0xffffff;
+  newCube.material = new THREE.MeshBasicMaterial({ color: randomColor });
+  let y = 0;
+  let x = 0;
+
+  if (i < 2 && i < 6) {
+    y = -3;
+  }
+
+  if (i % 3 === 0) {
+    x = 0;
+  } else {
+    x += 3;
+  }
+
+  if (i > 6) {
+    y = -6;
+  }
+  newCube.position.set(x, -y, 0);
+
+  scene.add(newCube);
+}
+
 cube.position.set(-5, 0, 0);
 scene.add(cube);
+
 // capsule
 const geometry = new THREE.CapsuleGeometry(1, 1);
 const material = new THREE.MeshBasicMaterial({ color: "purple" });
@@ -37,9 +64,9 @@ renderer.setSize(window.innerWidth, window.innerHeight);
 var element = document.getElementById("app");
 element.appendChild(renderer.domElement);
 function animate() {
-  cube.rotation.x += 0.01;
-  capsule.rotation.y += 0.01;
-  cone.rotation.x += 0.01;
+  for (let i = 0; i < scene.children.length; i++) {
+    scene.children[i].rotation.x += 0.01;
+  }
   requestAnimationFrame(animate);
   renderer.render(scene, camera);
 }

@@ -18,12 +18,19 @@ var cube = new THREE.Mesh(cubeGeometry, cubeMaterial);
 
 cube.position.set(-5, 0, 0);
 scene.add(cube);
-
+// capsule
 const geometry = new THREE.CapsuleGeometry(1, 1);
 const material = new THREE.MeshBasicMaterial({ color: "purple" });
 const capsule = new THREE.Mesh(geometry, material);
 capsule.position.set(0, 0, 0);
 scene.add(capsule);
+
+// cone
+const coneGeometry = new THREE.ConeGeometry(1, 2, 32);
+const coneMaterial = new THREE.MeshBasicMaterial({ color: "orange" });
+const cone = new THREE.Mesh(coneGeometry, coneMaterial);
+cone.position.set(5, 0, 0);
+scene.add(cone);
 
 var renderer = new THREE.WebGLRenderer({ antialias: true });
 renderer.setSize(window.innerWidth, window.innerHeight);
@@ -32,6 +39,7 @@ element.appendChild(renderer.domElement);
 function animate() {
   cube.rotation.x += 0.01;
   capsule.rotation.y += 0.01;
+  cone.rotation.x += 0.01;
   requestAnimationFrame(animate);
   renderer.render(scene, camera);
 }
